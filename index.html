@@ -505,6 +505,51 @@ section { scroll-margin-top: 2rem; }
 }
 body.lb-lock { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+
+/* ─── PRO SECTIONS (experience / skills / education) ─── */
+.sidebar-role { font-size: .75rem; color: var(--accent2); margin-bottom: 1.5rem; font-weight: 500; }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.section-sub { color: var(--fg2); font-size: .92rem; max-width: 620px; margin: -1rem 0 1.75rem; }
+
+.timeline { position: relative; display: flex; flex-direction: column; gap: 1.6rem; padding-left: 2rem; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px;
+  background: linear-gradient(var(--accent), var(--border)); border-radius: 2px; }
+.tl-item { position: relative; }
+.tl-dot { position: absolute; left: -2rem; top: 1.55rem; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); border: 3px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+.tl-item.current .tl-dot { background: var(--accent); animation: ring 2.2s infinite; }
+@keyframes ring { 0% { box-shadow: 0 0 0 0 rgba(37,99,196,.45); } 70% { box-shadow: 0 0 0 10px rgba(37,99,196,0); } 100% { box-shadow: 0 0 0 0 rgba(37,99,196,0); } }
+.exp-card { transition: transform .3s, box-shadow .3s, border-color .3s; }
+.exp-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,.1); border-color: var(--accent); }
+.exp-company { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; font-weight: 600; color: var(--accent2); margin-bottom: .9rem; }
+.exp-company .loc { color: var(--fg2); font-weight: 400; }
+.exp-desc { font-size: .9rem; color: var(--fg2); line-height: 1.75; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+.exp-tag { font-size: .72rem; font-weight: 500; padding: .22rem .6rem; border-radius: 99px;
+  background: var(--accent-glow); color: var(--accent2); border: 1px solid rgba(79,142,247,.2); }
+.exp-period.now { background: var(--accent); color: #fff; }
+
+.skill-group { transition: transform .3s, box-shadow .3s, border-color .3s; }
+.skill-group:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.09); border-color: var(--accent); }
+.skill-group-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; }
+.skill-group-head .skill-group-name { margin: 0; }
+.skill-ico { width: 32px; height: 32px; border-radius: 9px; background: var(--accent-glow); display: grid; place-items: center; font-size: 1rem; }
+.skill-tag { transition: background .2s, color .2s, transform .2s, border-color .2s; }
+.skill-tag:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px); }
+.skill-group.wide { grid-column: 1 / -1; }
+
+.edu-card { position: relative; overflow: hidden; display: flex; gap: 1rem; transition: transform .3s, box-shadow .3s, border-color .3s; }
+.edu-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.09); border-color: var(--accent); }
+.edu-ico { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-glow); display: grid; place-items: center; font-size: 1.3rem; }
+.edu-degree { font-size: 1rem; line-height: 1.3; }
+.edu-year { display: inline-block; background: var(--bg3); border: 1px solid var(--border); border-radius: 99px; padding: .15rem .65rem; margin-top: .7rem; }
+.edu-year.now { background: var(--accent); color: #fff; border-color: var(--accent); }
+@media (max-width: 768px) {
+  .timeline { padding-left: 1.6rem; } .tl-dot { left: -1.6rem; }
+  .section-heading { font-size: 1.65rem; } .exp-card { padding: 1.25rem; }
+  .skill-group.wide { grid-column: auto; }
+}
 </style>
 </head>
 <body>
@@ -522,6 +567,9 @@ body.lb-lock { overflow: hidden; }
     <div class="sidebar-role">Data Analyst &amp; BI Specialist</div>
     <div class="nav-label">Navigate</div>
     <a class="nav-link active" href="#home" onclick="setActive(this)"><span class="dot"></span>Home</a>
+    <a class="nav-link" href="#experience" onclick="setActive(this)"><span class="dot"></span>Experience</a>
+    <a class="nav-link" href="#skills" onclick="setActive(this)"><span class="dot"></span>Skills</a>
+    <a class="nav-link" href="#education" onclick="setActive(this)"><span class="dot"></span>Education</a>
     <a class="nav-link" href="#gallery" onclick="setActive(this)"><span class="dot"></span>Dashboards</a>
     <a class="nav-link" href="#contact" onclick="setActive(this)"><span class="dot"></span>Contact</a>
     <div class="sidebar-socials">
@@ -543,8 +591,93 @@ body.lb-lock { overflow: hidden; }
         I turn raw data into dashboards and insights that help teams make better decisions.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#gallery">View Dashboards</a>
+        <a class="btn btn-primary" href="#experience">View Experience</a>
+        <a class="btn btn-ghost" href="#gallery">View Dashboards</a>
         <a class="btn btn-ghost" href="#contact">Contact Me</a>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-eyebrow reveal">Career</div>
+      <h2 class="section-heading reveal">Work Experience</h2>
+      <div class="timeline">
+        <article class="tl-item current reveal">
+          <span class="tl-dot"></span>
+          <div class="exp-card">
+            <div class="exp-header">
+              <h3 class="exp-title">Data Analyst</h3>
+              <span class="exp-period now">Aug 2025 – Present</span>
+            </div>
+            <div class="exp-company">MeriPharmacy</div>
+            <p class="exp-desc">Centralised branch reporting at MeriPharmacy — replacing fragmented manual processes with a unified, scheduled analytics layer across all branch locations.</p>
+            <div class="exp-tags"><span class="exp-tag">Branch Reporting</span><span class="exp-tag">Automation</span><span class="exp-tag">Scheduled Analytics</span></div>
+          </div>
+        </article>
+        <article class="tl-item reveal">
+          <span class="tl-dot"></span>
+          <div class="exp-card">
+            <div class="exp-header">
+              <h3 class="exp-title">Data Analyst</h3>
+              <span class="exp-period">Sep 2023 – Aug 2025</span>
+            </div>
+            <div class="exp-company">Intelligenes</div>
+            <p class="exp-desc">Spearheaded the development of a flagship analytics product at Intelligenes — contributing directly to the company's core service offering. Architected a comprehensive reporting structure spanning marketing, regulatory, patient enrollment, and QA — improving executive visibility and decision-making speed across departments.</p>
+            <div class="exp-tags"><span class="exp-tag">Marketing</span><span class="exp-tag">Regulatory</span><span class="exp-tag">Patient Enrollment</span><span class="exp-tag">QA</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-eyebrow reveal">Expertise</div>
+      <h2 class="section-heading reveal">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-group reveal">
+          <div class="skill-group-head"><span class="skill-ico">📊</span><div class="skill-group-name">BI &amp; Visualisation</div></div>
+          <div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">DAX</span><span class="skill-tag">Power Query</span><span class="skill-tag">Google Analytics</span></div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-head"><span class="skill-ico">🗄️</span><div class="skill-group-name">Data Engineering</div></div>
+          <div class="skill-tags"><span class="skill-tag">SQL (PostgreSQL)</span><span class="skill-tag">ETL Pipelines</span><span class="skill-tag">Data Modelling</span><span class="skill-tag">Data Warehousing</span><span class="skill-tag">Databricks</span><span class="skill-tag">BigQuery</span></div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-head"><span class="skill-ico">☁️</span><div class="skill-group-name">Cloud &amp; Platforms</div></div>
+          <div class="skill-tags"><span class="skill-tag">Microsoft Azure</span><span class="skill-tag">AWS</span><span class="skill-tag">GCP</span><span class="skill-tag">SharePoint</span><span class="skill-tag">Power Automate</span><span class="skill-tag">PowerApps</span></div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-head"><span class="skill-ico">💻</span><div class="skill-group-name">Programming &amp; Tools</div></div>
+          <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">Excel (Power Pivot, Power Query)</span></div>
+        </div>
+        <div class="skill-group wide reveal">
+          <div class="skill-group-head"><span class="skill-ico">🤝</span><div class="skill-group-name">Leadership</div></div>
+          <div class="skill-tags"><span class="skill-tag">Team Leadership</span><span class="skill-tag">Stakeholder Management</span><span class="skill-tag">Agile/Scrum</span><span class="skill-tag">Cross-functional Collaboration</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-eyebrow reveal">Background</div>
+      <h2 class="section-heading reveal">Education</h2>
+      <div class="edu-grid">
+        <div class="edu-card reveal">
+          <span class="edu-ico">🎓</span>
+          <div>
+            <div class="edu-degree">Master of Science – Data Science</div>
+            <div class="edu-school">NED University of Engineering &amp; Technology</div>
+            <div class="edu-year now">Aug 2026 – Present · Karachi</div>
+          </div>
+        </div>
+        <div class="edu-card reveal">
+          <span class="edu-ico">📐</span>
+          <div>
+            <div class="edu-degree">Bachelor of Science – Applied Mathematics</div>
+            <div class="edu-school">University of Karachi</div>
+            <div class="edu-year">Jan 2019 – Feb 2023</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -707,6 +840,25 @@ lb.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - touchX; touchX = null;
   if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
 });
+
+// ─── REVEAL + SCROLL-SPY ───────────────────────────────────────────
+const rio = 'IntersectionObserver' in window ? new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+}, { threshold: 0.12 }) : null;
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 80 + 'ms';
+  rio ? rio.observe(el) : el.classList.add('in');
+});
+if ('IntersectionObserver' in window) {
+  const links = [...document.querySelectorAll('.nav-link')];
+  const spy = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) {
+      const l = links.find(a => a.getAttribute('href') === '#' + e.target.id);
+      if (l) setActive(l);
+    }});
+  }, { rootMargin: '-35% 0px -55% 0px' });
+  document.querySelectorAll('main section[id]').forEach(sec => spy.observe(sec));
+}
 </script>
 </body>
 </html>
